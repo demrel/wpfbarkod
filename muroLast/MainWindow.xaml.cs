@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -20,7 +22,7 @@ namespace muroLast
 {  /// <summary>
    /// Interaction logic for MainWindow.xaml
    /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : System.Windows.Window
     {
         int roomId = 0;
         int itemId = 0;
@@ -371,6 +373,41 @@ namespace muroLast
 
         }
 
+      
+
+        private void importfromexcel(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Office.Interop.Excel.Application excelApp = new Microsoft.Office.Interop.Excel.Application();
+            Microsoft.Office.Interop.Excel.Workbook workbook;
+            Microsoft.Office.Interop.Excel.Worksheet worksheet;
+            Microsoft.Office.Interop.Excel.Range range;
+            workbook = excelApp.Workbooks.Open("C:/"+ "testitem.xlsx");
+            worksheet = (Microsoft.Office.Interop.Excel.Worksheet)workbook.Sheets["Test Sheet"];
+
+            int column = 0;
+            int row = 0;
+
+            range = worksheet.UsedRange;
+
+            using (var context = new UniContext())
+            {
+                for (row = 2; row <= range.Rows.Count; row++)
+                {
+
+                    for (column = 1; column <= range.Columns.Count; column++)
+                    {
+                        Item itemObj = new Item
+                        {
+                            Name = (range.Cells[row, column] as Microsoft.Office.Interop.Excel.Range).Value2.ToString(),
+                        };
+                        context.Items.Add(itemObj);
+                    }
+                }
+                context.SaveChangesAsync();
+            }
+            workbook.Close(true, Missing.Value, Missing.Value);
+            excelApp.Quit();
+        }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {

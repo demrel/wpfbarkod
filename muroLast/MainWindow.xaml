@@ -143,7 +143,8 @@
                     </Grid.ColumnDefinitions>
                     <Label Content="Otaq" HorizontalAlignment="Left" Margin="354,13,0,0" VerticalAlignment="Top" Width="193" RenderTransformOrigin="0.5,0.5" />
                     <TextBox x:Name="adAdd" HorizontalAlignment="Left" Height="23" Margin="28,44,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="289"  />
-                    <Button Content="yaddaSaxla"   Margin="542,186,193,214" Click="Button_Click_4"/>
+                    <Button Content="yaddaSaxla"   Margin="542,186,193,214"  Click="Button_Click_4"/>
+                    <Button Content="inventar siyahısını əlavə et"   Margin="334,186,349,214" Click="importfromexcel"/>
                     <Label Content="Inventar" HorizontalAlignment="Left" Margin="28,10,0,0" VerticalAlignment="Top" Width="193" RenderTransformOrigin="0.5,0.5" />
                     <TextBox x:Name="inventarAdd" HorizontalAlignment="Left" Height="23" Margin="354,44,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="289"  />
                     <Label Content="Bina" HorizontalAlignment="Left" Margin="354,81,0,0" VerticalAlignment="Top" Width="193" RenderTransformOrigin="0.5,0.5" />
